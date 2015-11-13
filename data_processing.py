@@ -5,7 +5,7 @@ import random
 user_filename = 'yelp_dataset_challenge_academic_dataset/yelp_academic_dataset_user.json'
 review_filename = 'yelp_dataset_challenge_academic_dataset/yelp_academic_dataset_review.json'
 steps = 7
-k_users = 70
+k_users = 300 
 train_size_rate = 0.7
 ########################################################
 def multiLinesLoad(json_file_name):

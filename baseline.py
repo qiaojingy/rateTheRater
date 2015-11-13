@@ -154,6 +154,7 @@ if __name__ == '__main__':
   trainExamples = [(data, 1 if data['stars'] > 3 else -1) for data in trainingData]
   testExamples = [(data, 1 if data['stars'] > 3 else -1) for data in testData]
   perceptron(trainExamples, testExamples, extractWordAndIdFeatures)
+
   trainExamples = [(data, data['stars']) for data in trainingData]
   testExamples = [(data, data['stars']) for data in testData]
   softmax.train(trainExamples, testExamples, extractWordFeatures)

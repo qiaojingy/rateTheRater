@@ -3,6 +3,7 @@ from util import *
 import math
 
 # Calculating the probability of belonging to each class, given weights and features
+"""
 def classProbs(weights, features):
   probs = []
   k = len(weights)
@@ -11,6 +12,22 @@ def classProbs(weights, features):
   s = sum(probs)
   for i in range(k):
     probs[i] = probs[i] * 1.0/s
+  return probs
+"""
+
+def classProbs(weights, features):
+  probs = []
+  k = len(weights)
+  for i in range(k):
+    w1 = dotProduct(weights[i], features)
+    temp = []
+    for j in range(k):
+      if j == i:
+        temp.append(1)
+      else:
+        temp.append(math.exp(dotProduct(weights[j], features) - w1))
+    s = sum(temp)
+    probs.append(1.0/s)
   return probs
 
 # Using softmax to training on data, print training error and test error, return weights
@@ -23,7 +40,7 @@ def train(trainExamples, testExamples, featureExtractor):
   # These weights are stored in a list of length 5. 
   for i in range(5):
     weights.append({})
-  numIters = 5     # number of iterations through test examples
+  numIters = 20     # number of iterations through test examples
   # Doing stachastic gradient descent
   for iter in range(numIters):
     print "iteration   ", iter+1
@@ -48,12 +65,10 @@ def train(trainExamples, testExamples, featureExtractor):
   print 'Iter : %s   Training error = %s' % (iter+1, trainError)
   
   # calculate test error
-  """
   testError = evaluatePredictor(testExamples, lambda(x) : max((prob, k) for (k, prob) in enumerate(classProbs(weights, featureExtractor(x))))[1] + 1)
   print "=" * 30
   print "Result"
   print 'Iter : %s   Test error = %s' % (iter+1, testError)
-  """
   return weights
 
       
